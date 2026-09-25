@@ -509,6 +509,9 @@ export class BaileysStartupService extends ChannelStartupService {
       this.sendDataWebhook(Events.CONNECTION_UPDATE, {
         instance: this.instance.name,
         wuid: this.instance.wuid,
+        // [AtendeOne] @lid do próprio número, necessário para decifrar
+        // edições feitas pelo celular do número conectado
+        lid: (this.client.user as any)?.lid?.replace(/:\d+/, '') ?? null,
         profileName: await this.getProfileName(),
         profilePictureUrl: this.instance.profilePictureUrl,
         ...this.stateConnection,
